@@ -13,6 +13,14 @@ public class MorseTree {
         tree.insertRight(c);
     }
 
+    public MorseTree getLeft(){
+        return this.getLeft();
+    }
+
+    public MorseTree getRight(){
+        return this.getRight();
+    }
+
     public String preOrder(){
         String prOrder = "";
         prOrder = preOrderMaker(this.tree, prOrder);
@@ -57,13 +65,13 @@ public class MorseTree {
         return str;
     }
 
-    public String engToMorseMaker(Character s){
+    private String engToMorseMaker(Character s){
         if(tree.getLeft().isIn(s)){
-            return engToMorseMaker(s) + "-";
-        } else if(tree.getRight().isIn(s)){
             return engToMorseMaker(s) + "o";
+        } else if(tree.getRight().isIn(s)){
+            return engToMorseMaker(s) + "-";
         } else {
-            return "-";
+            return "";
         }
     }
 }
