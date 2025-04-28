@@ -48,4 +48,22 @@ public class MorseTree {
         }
         return s;
     }
+
+    public String engToMorese(String s){
+        String str = "";
+        for(int i=0;i<s.length();i++){
+            str = engToMorseMaker(s.charAt(i)) + "|";
+        }
+        return str;
+    }
+
+    public String engToMorseMaker(Character s){
+        if(tree.getLeft().isIn(s)){
+            return engToMorseMaker(s) + "-";
+        } else if(tree.getRight().isIn(s)){
+            return engToMorseMaker(s) + "o";
+        } else {
+            return "-";
+        }
+    }
 }
