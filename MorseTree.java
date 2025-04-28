@@ -13,12 +13,12 @@ public class MorseTree {
         tree.insertRight(c);
     }
 
-    public MorseTree getLeft(){
-        return this.getLeft();
+    public TreeNode<Character> getLeft(){
+        return tree.getLeft();
     }
 
-    public MorseTree getRight(){
-        return this.getRight();
+    public TreeNode<Character> getRight(){
+        return tree.getRight();
     }
 
     public String preOrder(){
@@ -57,21 +57,41 @@ public class MorseTree {
         return s;
     }
 
-    public String engToMorese(String s){
+    public String engToMorse(String target){
+        String s = target.toLowerCase();
         String str = "";
         for(int i=0;i<s.length();i++){
-            str = engToMorseMaker(s.charAt(i)) + "|";
+            String letter = engToMorseMaker(this.tree, s.charAt(i));
+            if(letter != "") str += letter + "|";
         }
         return str;
     }
 
-    private String engToMorseMaker(Character s){
-        if(tree.getLeft().isIn(s)){
-            return engToMorseMaker(s) + "o";
-        } else if(tree.getRight().isIn(s)){
-            return engToMorseMaker(s) + "-";
+    private String engToMorseMaker(TreeNode<Character> node, Character s){
+        if(node.getLeft() != null && node.getLeft().isIn(s)){
+            return "o" + engToMorseMaker(node.getLeft(), s);
+        } else if(node.getRight() != null && node.getRight().isIn(s)){
+            return "-" + engToMorseMaker(node.getRight(), s);
         } else {
             return "";
         }
+    }
+
+    public String morseToEng(String target){
+        String str = "";
+        for(int i=0;i<target.length();i++){
+            TreeNode<Character> node = this.tree;
+            while(target.charAt(i) != '|'){
+                node = morseToEngMaker(node, target.charAt(i));
+                i++;
+            }
+            str += node.getElement();
+        }
+        return str;
+    }
+
+    private TreeNode<Character> morseToEngMaker(TreeNode<Character> node, Character s){
+        if(s == 'o') return node.getLeft();
+        else return node.getRight();
     }
 }

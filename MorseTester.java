@@ -32,8 +32,19 @@ public class MorseTester {
         tree.getRight().getRight().getLeft().insertRight('q'); // --o-
         tree.getRight().getRight().insertRight('o'); // ---
 
-        System.out.println(tree.preOrder());
-        System.out.println(tree.postOrder());
+        // print out the preorder and postorder of the tree
+        System.out.println("Pre-Order: " + tree.preOrder());
+        System.out.println("Post-Order: " + tree.postOrder());
+
+        // define a string in english and translate it to morse code
+        String sentance = "I love java";
+        String morseSentance = tree.engToMorse(sentance);
+        System.out.println(morseSentance);
+
+        //translate back to english
+        String engSentance = tree.morseToEng(morseSentance);
+        System.out.println(engSentance);
+
         System.out.println("finished");
     }
 }
